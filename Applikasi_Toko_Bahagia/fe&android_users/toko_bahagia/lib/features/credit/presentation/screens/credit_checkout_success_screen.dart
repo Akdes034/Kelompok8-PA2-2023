@@ -58,7 +58,7 @@ class _CreditCheckoutSuccessScreenState
               ),
               const SizedBox(height: 20),
               const Text(
-                'Your Order has been placed successfully',
+                'Pesananm Berhasil Dibuatkan',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -66,7 +66,7 @@ class _CreditCheckoutSuccessScreenState
               ),
               const SizedBox(height: 20),
               Text(
-                'Order ID: ${widget.order.code}',
+                'Code Pesanan: ${widget.order.code}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -82,7 +82,7 @@ class _CreditCheckoutSuccessScreenState
               ),
               const SizedBox(height: 20),
               Text(
-                'Payment Method: ${widget.order.paymentMethod}',
+                'Metode Pembayaran: ${widget.order.paymentMethod}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -90,7 +90,7 @@ class _CreditCheckoutSuccessScreenState
               ),
               const SizedBox(height: 20),
               const Text(
-                'Thank you for shopping with us',
+                'Tetap Berbahagia Pelanggan...',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,

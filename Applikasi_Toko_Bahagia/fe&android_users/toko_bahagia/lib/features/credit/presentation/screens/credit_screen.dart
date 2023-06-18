@@ -230,7 +230,17 @@ class _CreditScreenState extends State<CreditScreen> {
                           ),
                         ),
                       ),
+                      if (_searchController.text.isEmpty || _provider == '')
 
+                        Text(
+                          'Carikan Provider Dulu',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: dark,
+                          ),
+                        ),
                       // grid view
                       BlocConsumer<CreditBloc, CreditState>(
                         listener: (context, state) {
@@ -282,16 +292,6 @@ class _CreditScreenState extends State<CreditScreen> {
                                             color: dark,
                                           ),
                                         ),
-                                        if (_searchController.text.isEmpty)
-                                          Text(
-                                            'Carikan Provider Dulu',
-                                            style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600,
-                                              color: dark,
-                                            ),
-                                          ),
                                       ],
                                     ),
                                   )

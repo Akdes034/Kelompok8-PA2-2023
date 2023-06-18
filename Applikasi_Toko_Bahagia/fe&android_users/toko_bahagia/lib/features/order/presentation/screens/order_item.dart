@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import '../../../../routes/app_routers.gr.dart';
 import '../../../../shared/theme.dart';
 import '../../data/models/order/order_model.dart';
+import 'package:intl/intl.dart';
 import '../bloc/order_bloc.dart';
 import '../bloc/order_event.dart';
 import '../shared/custom_button.dart';
@@ -39,7 +40,7 @@ class _OrderItemState extends State<OrderItem> {
     }
 
     final code = widget.order.id; // Mengambil nilai code dari objek order
-    final url = Uri.parse('http://192.168.88.52/test/api_del_shop/public/api/order/$code/edit-photo');
+    final url = Uri.parse('http://192.168.88.52/test/api&web_toko_bahagia/public/api/order/$code/edit-photo');
     final request = http.MultipartRequest('POST', url);
     request.files.add(await http.MultipartFile.fromPath('image', _imageFile!.path));
 
@@ -120,6 +121,15 @@ class _OrderItemState extends State<OrderItem> {
             ],
           ),
           const SizedBox(height: 10),
+          Text(
+            '${widget.order.description}',
+            style: TextStyle(
+              color: dark.withOpacity(0.8),
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 10),
           if (widget.order.orderDetails.isNotEmpty)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,21 +138,42 @@ class _OrderItemState extends State<OrderItem> {
                 final product = orderDetail.product;
                 final orderItemText = '${index + 1}. ${product.name} ${orderDetail.quantity} pcs';
 
-                return Text(orderItemText);
+                return Text(orderItemText,
+                  style: TextStyle(
+                    color: dark.withOpacity(0.8),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),);
+              }),
+            ),
+          if (widget.order.orderDetailsPulsa.isNotEmpty)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(widget.order.orderDetailsPulsa.length, (index) {
+                final orderDetailPulsa = widget.order.orderDetailsPulsa[index];
+                final credit = orderDetailPulsa.credit;
+                final orderItemText = '${index + 1}. ${credit.provider}  Pulsa: ${credit.nominal} ';
+
+                return Text(orderItemText,
+                  style: TextStyle(
+                    color: dark.withOpacity(0.8),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),);
               }),
             ),
           const SizedBox(height: 10),
           Text(
             'Tanggal Pesanan: ${widget.order.createdAt}',
             style: TextStyle(
-              color: dark.withOpacity(0.5),
+              color: dark.withOpacity(0.8),
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 10),
           Text(
-            'Total: Rp. ${widget.order.total}',
+            'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(widget.order.total)}',
             style: TextStyle(
               color: dark,
               fontSize: 16,
@@ -153,7 +184,7 @@ class _OrderItemState extends State<OrderItem> {
           Text(
             'Metode Pembayaran: ${widget.order.paymentMethod}',
             style: TextStyle(
-              color: dark.withOpacity(0.5),
+              color: dark.withOpacity(0.8),
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
@@ -174,7 +205,7 @@ class _OrderItemState extends State<OrderItem> {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: const Text('Selected Image'),
+                            title: const Text('Gambar Yang Dipilih'),
                             content: Image.file(_imageFile!),
                             actions: [
                               TextButton(

@@ -9,6 +9,7 @@ import '../bloc/product_detail_event.dart';
 import '../bloc/product_detail_state.dart';
 import '../../data/models/product_model.dart';
 import 'package:delshop/shared/strings.dart';
+import 'package:intl/intl.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final int productId;
@@ -158,7 +159,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ),
                           if (state.product.discount != 0)
                             Text(
-                              "Rp ${state.product.price - (state.product.price * state.product.discount / 100)} ",
+                              'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(state.product.price - (state.product.price * state.product.discount / 100))}',
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 18,
@@ -168,7 +169,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             )
                           else
                             Text(
-                              "Rp ${state.product.price}",
+                              'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(state.product.price)}',
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 16,
@@ -254,8 +255,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           "Kuantitas: " + state.product.quantity.toString(),
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w200,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
                             color: dark,
                           ),
                         ),

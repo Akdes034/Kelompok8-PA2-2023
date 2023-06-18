@@ -20,11 +20,18 @@ import '../features/credit/domain/repository/credit_repository.dart';
 import '../features/credit/domain/usecases/get_credits.dart';
 import '../features/home/data/datasource/home_product_remote_source.dart'
     as home;
-import '../features/home/data/datasource/home_user_local_data_source.dart';
-import '../features/home/data/repository/home_repository.dart';
-import '../features/home/domain/repository/home_repository.dart';
+import '../features/home/data/datasource/home_user_local_data_source.dart' as home;
+import '../features/home/data/repository/home_repository.dart' as home;
+import '../features/home/domain/repository/home_repository.dart' as home;
 import '../features/home/domain/usercases/get_local_user.dart' as home;
 import '../features/home/domain/usercases/get_products.dart' as home;
+
+import '../features/home_guest/data/datasource/home_product_remote_source.dart'
+as homeguest;
+import '../features/home_guest/data/repository/home_repository.dart' as homeguest;
+import '../features/home_guest/domain/repository/home_repository.dart' as homeguest;
+import '../features/home_guest/domain/usercases/get_products.dart' as homeguest;
+
 import '../features/login/data/datasource/login_remote_datasource.dart';
 import '../features/login/data/repository/login_user_repository.dart';
 import '../features/login/domain/repository/login_user_repository.dart';
@@ -63,6 +70,7 @@ import '../features/room_detail/data/repository/room_detail_repository.dart';
 import '../features/room_detail/domain/repository/room_detail_repository.dart';
 import '../features/room_detail/domain/usecases/get_detail_room.dart';
 import '../features/room_detail/domain/usecases/request_room.dart';
+
 import '../features/splash/domain/usecase/check_user_login_status.dart';
 import '../services/user_cache_service.dart';
 import 'request.dart';
@@ -103,8 +111,8 @@ Future<void> setUpServiceLocator() async {
       () => home.GetLocalUserUsecase());
 
   // datasource
-  serviceLocator.registerFactory<HomeLocalUserDataSource>(
-      () => HomeLocalUserDataSourceImlp());
+  serviceLocator.registerFactory<home.HomeLocalUserDataSource>(
+      () => home.HomeLocalUserDataSourceImlp());
 // home products
 // usecase
   serviceLocator.registerFactory<home.GetProductsFromServer>(
@@ -115,7 +123,21 @@ Future<void> setUpServiceLocator() async {
       () => home.ProductsRemoteDataSourceImpl());
 
 // repositories
-  serviceLocator.registerFactory<HomeRepository>(() => HomeRepositoryImpl());
+  serviceLocator.registerFactory<home.HomeRepository>(() => home.HomeRepositoryImpl());
+
+//home guest
+
+// home products guest
+// usecase
+  serviceLocator.registerFactory<homeguest.GetProductsGuestFromServer>(
+          () => homeguest.GetProductsGuestFromServer());
+
+  // datasource
+  serviceLocator.registerFactory<homeguest.ProductsRemoteDataSource>(
+          () => homeguest.ProductsRemoteDataSourceImpl());
+
+// repositories
+  serviceLocator.registerFactory<homeguest.HomeRepository>(() => homeguest.HomeRepositoryImpl());
 
 // detail product
 // usecase

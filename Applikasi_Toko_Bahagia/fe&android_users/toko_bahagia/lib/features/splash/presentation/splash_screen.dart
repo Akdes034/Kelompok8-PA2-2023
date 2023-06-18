@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
             .checkIfUserLoggedIn()
             .then((isUserLoggedIn) {
           AutoRouter.of(context).pushAndPopUntil(
-            isUserLoggedIn ? const HomeScreen() : const LoginScreen(),
+            isUserLoggedIn ? const HomeScreen() : const HomeGuestScreen(),
             predicate: (_) => false,
           );
         });

@@ -140,12 +140,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 Icons.phone,
                                 color: softGray,
                               ),
-                              hintText: "Phone",
+                              hintText: "Nomor Handphone",
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Harap masukkan nomor telepon Anda';
-                                } else if (value.length < 10) {
-                                  return 'Nomor telepon minimal harus terdiri atas 10 digit';
+                                  return 'Harap masukkan nomor handphone Anda';
+                                }
+                                else if(!value.contains(RegExp(r'^[0-9]+$'))){
+                                  return 'Harap masukan nomor handphone yang valid';
+                                }else if (value.length < 10) {
+                                  return 'Nomor handphone minimal harus terdiri atas 10 digit';
                                 }
                                 return null;
                               },

@@ -1,24 +1,31 @@
 import 'package:delshop/features/home/presentation/screens/discount_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:delshop/features/home/presentation/bloc/home_bloc.dart';
-import 'package:delshop/features/home/presentation/bloc/home_event.dart';
-import 'package:delshop/features/home/presentation/bloc/home_state.dart';
-import 'package:delshop/features/navigation/presentation/screens/bottom_navigation_bar_screen.dart';
+import 'package:delshop/features/home_guest/presentation/bloc/home_bloc.dart';
+import 'package:delshop/features/home_guest/presentation/bloc/home_event.dart';
+import 'package:delshop/features/home_guest/presentation/bloc/home_state.dart';
 import 'package:delshop/shared/theme.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:delshop/routes/app_routers.gr.dart';
+
 
 import './product_item.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
 
-  static const String routeName = '/home';
+class HomeGuestScreen extends StatefulWidget {
+  const HomeGuestScreen({Key? key}) : super(key: key);
+
+  static const String routeName = '/home_guest';
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeGuestScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeGuestScreen> {
+
+  void _showLoginPage() {
+    AutoRouter.of(context).replace(const LoginScreen());
+  }
   String _search = '';
   String _dsearch = '';
   final TextEditingController _searchController = TextEditingController();
@@ -27,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeBloc>().add(
+    context.read<HomeGuestBloc>().add(
       GetDataEvent(_search),
     );
   }
@@ -44,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _search = _searchController.text;
       _dsearch = _search;
     });
-    context.read<HomeBloc>().add(
+    context.read<HomeGuestBloc>().add(
       GetDataEvent(_search),
     );
   }
@@ -52,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocConsumer<HomeBloc, HomeState>(
+      child: BlocConsumer<HomeGuestBloc, HomeGuestState>(
         listener: (context, state) {},
         builder: (context, state) {
           if (state is HomeErrorState) {
@@ -89,14 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Halo, ${state.user.name}',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
                                       'Silahkan Menikmati Pelayanan di Toko Bahagia ini',
                                       style: const TextStyle(
                                         color: Colors.white,
@@ -109,13 +108,27 @@ class _HomeScreenState extends State<HomeScreen> {
                                 // icon notification bell with how many notifications
 
                                 // profile picture
-                                Container(
-                                  margin: const EdgeInsets.only(right: 10),
-                                  child: const CircleAvatar(
-                                    radius: 20,
-                                    backgroundImage: AssetImage('assets/images/logo.png'),
+                                GestureDetector(
+                                  onTap: _showLoginPage,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.login,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                      const SizedBox(width: 5),
+                                      Text(
+                                        'Login',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                )
+
                               ],
                             ),
                             SizedBox(
@@ -175,41 +188,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: Column(
                           children: [
-                            if (_dsearch == "")
-                              Container(
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
 
-                              child: const Text(
-                                'Ada Diskon Sama Promosi nih....',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            DiscountItem(
-                              productList: state.productList,
-                            ),
                           ],
                         ),
                       ),
                       const SizedBox(
                         height: 20,
-                      ),
-                      if (_dsearch == "")
-                        Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'Daftar Semua Produk',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                       ),
                       if (_dsearch != '')
                         Container(
@@ -258,7 +242,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              bottomNavigationBar: const NavigationBarScreen(),
             );
           } else {
             return Scaffold(

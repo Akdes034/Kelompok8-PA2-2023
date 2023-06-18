@@ -47,7 +47,7 @@ class _CheckoutSuccessScreenState extends State<CheckoutSuccessScreen> {
               ),
               const SizedBox(height: 20),
               const Text(
-                'Order Placed',
+                'Pesanan Berhasil',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

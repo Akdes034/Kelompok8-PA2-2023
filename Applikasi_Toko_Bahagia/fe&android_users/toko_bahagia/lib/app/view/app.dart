@@ -11,6 +11,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../features/cart/presentation/bloc/cart_bloc.dart';
 import '../../features/checkout/presentation/bloc/checkout_bloc.dart';
 import '../../features/home/presentation/bloc/home_bloc.dart';
+import '../../features/home_guest/presentation/bloc/home_bloc.dart';
 import '../../features/login/presentation/bloc/login_bloc.dart';
 import '../../features/product_detail/presentation/bloc/product_detail_bloc.dart';
 import '../../features/register/presentation/bloc/register_bloc.dart';
@@ -32,6 +33,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => HomeBloc(),
+        ),
+        BlocProvider(
+          create: (_) => HomeGuestBloc(),
         ),
         BlocProvider(
           create: (_) => ProductDetailBloc(),

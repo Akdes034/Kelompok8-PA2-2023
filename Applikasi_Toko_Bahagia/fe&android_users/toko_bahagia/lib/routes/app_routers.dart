@@ -12,6 +12,7 @@ import 'package:delshop/features/room_detail/presentation/screens/room_detail_sc
 
 import '../features/cart/presentation/screens/cart_screen.dart';
 import '../features/home/presentation/screens/home_screen.dart';
+import '../features/home_guest/presentation/screens/home_screen.dart';
 import '../features/login/presentation/screens/login_screen.dart';
 import '../features/product_detail/presentation/screens/product_detail_screen.dart';
 import '../features/register/presentation/screens/register_screen.dart';
@@ -23,6 +24,7 @@ import '../features/splash/presentation/splash_screen.dart';
     AutoRoute<bool>(page: LoginScreen, path: LoginScreen.routeName),
     AutoRoute<bool>(page: RegisterScreen, path: RegisterScreen.routeName),
     AutoRoute<bool>(page: HomeScreen, path: HomeScreen.routeName),
+    AutoRoute<bool>(page: HomeGuestScreen, path: HomeGuestScreen.routeName),
     AutoRoute<bool>(
       page: ProductDetailScreen,
       path: ProductDetailScreen.routeName,

@@ -14,6 +14,7 @@
 import 'package:auto_route/auto_route.dart' as _i17;
 import 'package:flutter/material.dart' as _i18;
 
+import '../features/home_guest/presentation/screens/home_screen.dart' as _i19;
 import '../features/cart/presentation/screens/cart_screen.dart' as _i11;
 import '../features/checkout/data/models/order/order_model.dart' as _i21;
 import '../features/checkout/presentation/screens/checkout_screen.dart' as _i12;
@@ -162,6 +163,13 @@ class FlutterRouter extends _i17.RootStackRouter {
         child: const _i16.RequestRoomScreen(),
       );
     },
+    HomeGuestScreen.name: (routeData) {
+      return _i17.MaterialPageX<bool>(
+        routeData: routeData,
+        child: const _i19.HomeGuestScreen(),
+      );
+    },
+
   };
 
   @override
@@ -230,6 +238,10 @@ class FlutterRouter extends _i17.RootStackRouter {
           RequestRoomScreen.name,
           path: '/request-room',
         ),
+    _i17.RouteConfig(
+      HomeGuestScreen.name,
+      path: '/home_guest',
+    ),
       ];
 }
 
@@ -536,4 +548,15 @@ class RequestRoomScreen extends _i17.PageRouteInfo<void> {
         );
 
   static const String name = 'RequestRoomScreen';
+}
+/// generated route for
+/// [_i19.HomeScreen]
+class HomeGuestScreen extends _i17.PageRouteInfo<void> {
+  const HomeGuestScreen()
+      : super(
+    HomeGuestScreen.name,
+    path: '/home_guest',
+  );
+
+  static const String name = 'HomeGuestScreen';
 }

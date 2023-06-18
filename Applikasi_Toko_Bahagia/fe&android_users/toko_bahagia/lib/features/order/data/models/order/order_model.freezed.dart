@@ -26,6 +26,7 @@ mixin _$OrderModel {
   String get description => throw _privateConstructorUsedError;
   String get paymentMethod => throw _privateConstructorUsedError;
   List<OrderDetail> get orderDetails => throw _privateConstructorUsedError;
+  List<OrderDetailPulsa> get orderDetailsPulsa => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get bukti_pembayaran => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $OrderModelCopyWith<$Res> {
       String description,
       String paymentMethod,
       List<OrderDetail> orderDetails,
-      String status,
+        List<OrderDetailPulsa> orderDetailsPulsa,
+        String status,
       String createdAt,
       String bukti_pembayaran});
 }
@@ -73,6 +75,7 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
     Object? description = null,
     Object? paymentMethod = null,
     Object? orderDetails = null,
+    Object? orderDetailsPulsa = null,
     Object? status = null,
     Object? createdAt = null,
     Object? bukti_pembayaran = null,
@@ -102,6 +105,10 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
           ? _value.orderDetails
           : orderDetails // ignore: cast_nullable_to_non_nullable
               as List<OrderDetail>,
+      orderDetailsPulsa: null == orderDetailsPulsa
+          ? _value.orderDetailsPulsa
+          : orderDetailsPulsa // ignore: cast_nullable_to_non_nullable
+      as List<OrderDetailPulsa>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -133,7 +140,8 @@ abstract class _$$_OrderModelCopyWith<$Res>
       String description,
       String paymentMethod,
       List<OrderDetail> orderDetails,
-      String status,
+        List<OrderDetailPulsa> orderDetailsPulsa,
+        String status,
       String createdAt,
       String bukti_pembayaran});
 }
@@ -155,6 +163,7 @@ class __$$_OrderModelCopyWithImpl<$Res>
     Object? description = null,
     Object? paymentMethod = null,
     Object? orderDetails = null,
+    Object? orderDetailsPulsa = null,
     Object? status = null,
     Object? createdAt = null,
     Object? bukti_pembayaran = null,
@@ -184,6 +193,10 @@ class __$$_OrderModelCopyWithImpl<$Res>
           ? _value._orderDetails
           : orderDetails // ignore: cast_nullable_to_non_nullable
               as List<OrderDetail>,
+      orderDetailsPulsa: null == orderDetailsPulsa
+          ? _value._orderDetailsPulsa
+          : orderDetailsPulsa // ignore: cast_nullable_to_non_nullable
+      as List<OrderDetailPulsa>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -201,19 +214,20 @@ class __$$_OrderModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
 class _$_OrderModel implements _OrderModel {
-  _$_OrderModel(
-      {required this.id,
-      required this.code,
-      required this.total,
-      this.description = '-',
-      required this.paymentMethod,
-      required final List<OrderDetail> orderDetails,
-      required this.status,
-      required this.createdAt,
-      required this.bukti_pembayaran})
-      : _orderDetails = orderDetails;
+  _$_OrderModel({
+    required this.id,
+    required this.code,
+    required this.total,
+    this.description = '-',
+    required this.paymentMethod,
+    required List<OrderDetail> orderDetails, // Perbaikan 1: Hapus kata kunci 'final'
+    required List<OrderDetailPulsa> orderDetailsPulsa, // Perbaikan 1: Hapus kata kunci 'final'
+    required this.status,
+    required this.createdAt,
+    required this.bukti_pembayaran,
+  }) : _orderDetails = orderDetails,
+        _orderDetailsPulsa = orderDetailsPulsa;
 
   factory _$_OrderModel.fromJson(Map<String, dynamic> json) =>
       _$$_OrderModelFromJson(json);
@@ -236,6 +250,13 @@ class _$_OrderModel implements _OrderModel {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_orderDetails);
   }
+  final List<OrderDetailPulsa> _orderDetailsPulsa;
+  @override
+  List<OrderDetailPulsa> get orderDetailsPulsa {
+    if (_orderDetailsPulsa is EqualUnmodifiableListView) return _orderDetailsPulsa;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orderDetailsPulsa);
+  }
 
   @override
   final String status;
@@ -245,7 +266,7 @@ class _$_OrderModel implements _OrderModel {
   final String bukti_pembayaran;
   @override
   String toString() {
-    return 'OrderModel(id: $id, code: $code, total: $total, description: $description, paymentMethod: $paymentMethod, orderDetails: $orderDetails, status: $status, createdAt: $createdAt, bukti_pembayaran: $bukti_pembayaran)';
+    return 'OrderModel(id: $id, code: $code, total: $total, description: $description, paymentMethod: $paymentMethod, orderDetails: $orderDetails, orderDetailsPulsa: $orderDetailsPulsa ,status: $status, createdAt: $createdAt, bukti_pembayaran: $bukti_pembayaran)';
   }
 
   @override
@@ -262,6 +283,8 @@ class _$_OrderModel implements _OrderModel {
                 other.paymentMethod == paymentMethod) &&
             const DeepCollectionEquality()
                 .equals(other._orderDetails, _orderDetails) &&
+            const DeepCollectionEquality()
+            .equals(other._orderDetailsPulsa, _orderDetailsPulsa) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt))&&
@@ -279,6 +302,7 @@ class _$_OrderModel implements _OrderModel {
       description,
       paymentMethod,
       const DeepCollectionEquality().hash(_orderDetails),
+      const DeepCollectionEquality().hash(_orderDetailsPulsa),
       status,
       createdAt,
       bukti_pembayaran);
@@ -305,6 +329,7 @@ abstract class _OrderModel implements OrderModel {
       final String description,
       required final String paymentMethod,
       required final List<OrderDetail> orderDetails,
+        required final List<OrderDetailPulsa> orderDetailsPulsa,
       required final String status,
       required final String createdAt,
       required final String bukti_pembayaran}) = _$_OrderModel;
@@ -324,6 +349,8 @@ abstract class _OrderModel implements OrderModel {
   String get paymentMethod;
   @override
   List<OrderDetail> get orderDetails;
+  @override
+  List<OrderDetailPulsa> get orderDetailsPulsa;
   @override
   String get status;
   @override

@@ -65,7 +65,7 @@ class _CreditCheckoutScreenState extends State<CreditCheckoutScreen> {
               },
             ),
             title: const Text(
-              'Checkout',
+              'Pesan Sekarang',
               style: TextStyle(
                 color: Colors.black,
               ),
@@ -276,8 +276,10 @@ class _CreditCheckoutScreenState extends State<CreditCheckoutScreen> {
                     if (_selectedPaymentMethod.isEmpty) {
                       EasyLoading.showError('Pilih Metode Pembayarannya');
                     }
-                    if(_description.isEmpty){
-                      EasyLoading.showError('Masukan Nomor Telephone');
+                    if (_description.isEmpty) {
+                      EasyLoading.showError('Masukkan Nomor Telephone');
+                    } else if (!_description.contains(RegExp(r'^[0-9]+$')) || _description.length < 12) {
+                      EasyLoading.showError('Masukkan Nomor Telephone yang valid (minimal 12 angka)');
                     }
                     else {
                       context.read<CreditBloc>().add(
